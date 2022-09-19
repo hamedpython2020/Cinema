@@ -1,0 +1,51 @@
+{% extends "ticketing/page-Base_list.html"%}
+{#    ##################################################################}
+{% block page-title %}
+    بلیط
+    {{ tickets.showtime.movie }}
+{% endblock %}
+{#    ##################################################################}
+{% block page-nav-name %}
+    بلیط فیلم
+    {{ tickets.showtime.movie }}
+{% endblock %}
+{#    ##################################################################}
+{% block main-content %}
+    <div class="media">
+        <div class="media-body d-flex flex-column bg-light mx-5">
+            <h1 class="mt-4 text-center">
+                {{ tickets.showtime.movie }}</h1>
+            <div class="row m-5" style="font-size: large">
+                <div class="row col-md-8 ">
+                    <p class="rounded  text-danger bg-warning p-3 col-3 "> سینما : </p>
+                    <p class="rounded text-dark col-8 bg-secondary p-2 text-center "> {{ tickets.showtime.cinema }} </p>
+                    <p class="rounded bg-warning p-3 text-danger col-3 "> زمان اکران :  </p>
+                    <p class="rounded text-center text-dark bg-secondary p-2 col-8"> {{tickets.showtime.start_time|date:"Y/n/j - H:i" }} </p>
+                    <p class="rounded bg-warning p-3 text-danger col-3 "> تعداد : </p>
+                    <p class="rounded text-center text-dark bg-secondary p-2 col-8" > {{ tickets.seat_number }} <i class="fas fa-chair"></i> </p>
+                    <p class="rounded bg-warning p-3 text-danger col-3 "> خریداد : </p>
+                    <p class="rounded text-center text-dark bg-secondary p-2 col-8" > {{ tickets.buyer }}</p>
+                    <p class="rounded bg-warning p-3 text-danger col-3 "> زمانی خریداری شده : </p>
+                    <p class="rounded text-center text-dark bg-secondary p-3 text-justify col-8"> {{ tickets.buy_time|date:"Y/n/j - H:i" }} </p>
+                    <div class="rounded alert  alert-warning p-3 text-danger ">
+                        <h3 class="text-center display-5"> توصیه : </h3>
+                        <hr/>
+                        <p class="text-info"><i class="bi text-danger bi-exclamation-triangle-fill"></i> -
+                            حتما 30 دقیقه قبل از شروع فیلم در سینما حاضر شوید .</p>
+                        <hr/>
+                        <p class="text-info"><i class="bi text-danger bi-exclamation-triangle-fill"></i> -
+                             بلیط ها را به همراه خود داشته باشید. </p>
+                        <hr/>
+                        <p class="text-info"><i class="bi text-danger bi-exclamation-triangle-fill"></i> -
+                            تعداد {{ tickets.showtime.free_seats }} صندلی باقی مانده .
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-4  text-center rounded">
+                    <i class="bi bi-qr-code" style="font-size: 300px"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

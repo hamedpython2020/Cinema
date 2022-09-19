@@ -1,0 +1,39 @@
+{% extends "ticketing/page-Base_list.html"%}
+{#    ##################################################################}
+{% block page-title %}
+    {{ cinemas}}
+{% endblock %}
+{#    ##################################################################}
+{% block page-nav-name %}
+    درباره
+    {{ cinemas }}
+{% endblock %}
+{#    ##################################################################}
+{% block main-content %}
+    <div class="media">
+        <div class="media-body d-flex flex-column bg-light mx-5">
+            <h1 class="mt-4 text-center">{{ movies.name }}</h1>
+            <div class="row m-5" style="font-size: large">
+                <div class="row col-md-8 ">
+                    <p class="rounded  text-danger bg-warning p-3 col-3 offset-md-9"> نام سینما : </p>
+                    <p class="rounded text-dark col-8 bg-secondary p-2 text-center "> {{ cinemas }} </p>
+                    <p class="rounded bg-warning p-3 text-danger col-3 offset-md-9"> شهر : </p>
+                    <p class="rounded text-center text-dark bg-secondary p-2 col-8"> {{ cinemas.city }} </p>
+                    <p class="rounded bg-warning p-3 text-danger col-3 offset-md-9"> ظرفیت : </p>
+                    <p class="rounded text-center text-dark bg-secondary p-2 col-8"> {{ cinemas.capacity }} نفر </p>
+                    <p class="rounded bg-warning p-3 text-danger col-3 offset-md-9"> تلفن : </p>
+                    <p class="rounded text-center text-dark bg-secondary p-2 col-8"> {{ cinemas.phone }} </p>
+                    <p class="rounded bg-warning p-3 text-danger col-3 offset-md-9"> آدرس : </p>
+                    <p class="rounded text-end text-dark bg-secondary p-3 text-justify col-8"> {{ cinemas.address }} </p>
+                </div>
+                <div class="col-md-4">
+                    {% if movies.poster %}
+                        <img class="mx-5 mt-2" src="{{ cinemas.image.url }}" width=400px" height="400" alt="{{ cinemas }}">
+                    {% else %}
+                        <i class="bi bi-building text-info " style="font-size: 300px"></i>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

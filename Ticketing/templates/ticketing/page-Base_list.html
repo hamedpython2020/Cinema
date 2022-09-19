@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="hamed" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block page-title %}{% endblock %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/bootstrap.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/font-awesome.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "ticketing/css/main.css" %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+</head>
+{# /////////////////////////////////////////////////////////////////////////////////////////////////////// #}
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-3">
+        <div class="container">
+            <a class="navbar-brand" href="http://127.0.0.1:8000/">
+                سامانه فروش بلیط سینما
+            <small class="blockquote-footer text-primary">
+                {% block page-nav-name %} {% endblock %}
+            </small>
+            </a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://127.0.0.1:8000/">خانه</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "Ticketing:movie_list" %}">لیست فیلم ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "Ticketing:cinema_list" %}">لیست سینما ها</a>
+                    </li>
+                        {% if user.is_authenticated %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url "Ticketing:showtime_list" %}">لیست سانس ها</a>
+                            </li>
+                            <li class="nav-item  ">
+                                {{ user.is_authenticat }}
+                            <div class="dropdown pr-5 ">
+                                <button class="dropdown-topple btn btn-primary" type="button" data-toggle="dropdown">
+                                    {% if user.get_full_name %}
+                                        {{ user.get_full_name }}
+                                    {% else %}
+                                        {{ user.username }}
+                                    {% endif %}
+
+                                </button>
+                                <div class="dropdown-menu">
+                                    <p class="dropdown-item">اعتبار : {{ user.profile.balance }} تومان
+                                        <i class="fas fa-coins text-primary"></i>
+                                    </p>
+                                     <hr/>
+                                    <a class="dropdown-item" href="{% url "accounts:profile" %}">پروفایل
+                                        <i class="bi bi-person-workspace text-info"></i>
+                                    </a>
+                                    <a class="dropdown-item" href="{% url "Ticketing:ticket_list" %}">بلیط های من
+                                        <i class=" fas fa-ticket-alt text-success"></i>
+                                    </a>
+                                    <a class="dropdown-item" href="{% url "accounts:payment" %}">پرداخت های من
+                                        <i class="bi bi-receipt-cutoff text-info"></i>
+                                    </a>
+                                    <hr/>
+                                    <a class="dropdown-item" href="{% url "accounts:logout" %}">خروج
+                                        <i class="bi bi-box-arrow-right text-danger"></i>
+                                    </a>
+                                </div>
+                            </div>
+                       </li>
+                    {% else %}
+                        <li class="nav-item pr-5">
+                            <a class="btn btn-outline-success" href="{% url "accounts:login" %}">ورود
+                                <i class="bi bi-box-arrow-in-right"></i>
+                            </a>
+                            <a class="btn btn-outline-light " href="{% url "accounts:signup" %}">ثبت نام
+                                <i class="bi bi-plus-square"></i>
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li class="nav-item pr-2">
+                        <a class="btn btn-outline-warning" href="{% url "Ticketing:showtime_list" %}"> خرید بلیط
+                            <i class="bi bi-ticket-fill"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+{#    ##################################################################}
+
+
+        {% block main-content %}
+            متاسفانه مشکلی پیش امده
+        {% endblock %}
+    <div class="row pt-5 d-flex sticky-bottom">
+        <div class="col-md-4"></div>
+        <div class="align-content-end d-flex flex-column">
+            <a class="text-decoration-none" href="https://www.instagram.com/hamedord81/">
+                <p class="display-4 d-inline" > ارتباط با ما  </p>
+                    <i class="bi bi-instagram display-4 pt-5"></i>
+                    <i class="bi bi-whatsapp  display-4 pt-5"></i>
+                    <i class="bi bi-telegram  display-4 pt-5"></i>
+                    <i class="bi bi-twitter   display-4 pt-5"></i>
+                    <i class="bi bi-facebook  display-4 pt-5"></i>
+            </a>
+        </div>
+    </div>
+<script src="{% static "ticketing/js/main.js" %}"></script>
+<script src="{% static "ticketing/js/jquery-3.4.0.min.js" %}"></script>
+<script src="{% static "ticketing/js/bootstrap.bundle.js" %}"></script>
+<script src="{% static "ticketing/js/font-awesome.js" %}"></script>
+</body>
+</html>

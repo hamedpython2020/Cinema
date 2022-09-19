@@ -1,0 +1,88 @@
+{% extends "ticketing/page-Base_list.html" %}
+{#    ##################################################################}
+{% block page-title %}
+    لیست سانس های نمایش
+{% endblock %}
+
+{#<\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\>#}
+{% block page-nav-name %}
+    لیست سانس ها
+{% endblock %}
+{#    ##################################################################}
+{% block main-content %}
+    {% csrf_token %}
+    <div class="bg-light p-2">
+        {% if showtime %}
+            <div class="search-bar m-2">
+                <form class="form-row p-2" method="GET" action="">
+                    {% include "ticketing/_form_shotime__list.html" with field=search_box.movie_name %}
+                    {% include "ticketing/_form_shotime__list.html" with field=search_box.cinema %}
+                    {% include "ticketing/_form_shotime__list.html" with field=search_box.movie_length_max div_size=1  %}
+                    {% include "ticketing/_form_shotime__list.html" with field=search_box.movie_length_min div_size=1  %}
+                    <div class="align-content-center col-3">
+                        {{ search_box.sale_access }}
+                        {{ search_box.sale_access.label }}
+                    </div>
+                    {% include "ticketing/_form_shotime__list.html" with field=search_box.price_range %}
+                    <button  type="submit" class=" btn btn-info " name="">
+                        فیلتر کردن
+                    </button>
+                </form>
+            </div>
+            <div class="row d-flex justify-content-between mr-4">
+                {% for showtime in showtime %}
+                    <div class="col-sm-3 mb-3">
+                        <a href="{% url "Ticketing:showtime_detail" showtime_id=showtime.id %}"
+                           class="showtime-box btn d-flex flex-column
+                               {% if showtime.status == showtime.sale_started %}
+                                    btn-outline-dark border-primary
+                               {% else %}
+                                    btn-outline-secondary border-danger disabled
+
+                               {% endif %}">
+                            <span>{{ showtime.movie }}</span>
+                            <br/>
+                            <span>{{ showtime.cinema }}</span>
+                            <br/>
+                            <span>
+                                {{ showtime.start_time|date:"l n/j ساعت H:i" }}
+                            </span>
+                            <br/>
+                            <span class="showtime-status badge mx-auto
+                                   {% if showtime.status == showtime.sale_not_started %}
+                                       badge-warning
+                                   {% elif showtime.status == showtime.show_cancelled %}
+                                       badge-danger
+                                   {% elif showtime.status == showtime.sale_started %}
+                                       badge-success
+                                   {% else %}
+                                       badge-secondary
+                                   {% endif %}">
+                                {% if showtime.status == showtime.sale_started %}
+                                    {{ showtime.get_price_display }}
+                                {% else %}
+                                    {{ showtime.get_status_display }}
+                                {% endif %}
+                            </span>
+                            {% if showtime.status == showtime.sale_started and showtime.free_seats < 10 %}
+                                <span class="badge badge-danger m-auto">
+                                    {{ showtime.free_seats }} <i class="fas fa-chair"></i>
+                                </span>
+                            {% endif %}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="alert alert-info col-3">
+                        {{ showtime_c}}
+                        سانس یافت شد.
+                </div>
+            </div>
+        {% else %}
+            <div class="alert alert-danger">
+                هیچ سانسی یافت نشد
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

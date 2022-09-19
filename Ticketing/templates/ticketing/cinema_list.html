@@ -1,0 +1,39 @@
+{% extends "ticketing/page-Base_list.html" %}
+{#    ##################################################################}
+{% block page-title %}
+    فهرست سینما ها
+{% endblock %}
+{#    ##################################################################}
+{% block page-nav-name %}
+    لیست سینما ها
+{% endblock %}
+{#    ##################################################################}
+{% block main-content %}
+    <div class="row pt-2">
+        <div class="col-1"> </div>
+        {% if cinemas %}
+        <div class="col-10">
+            <ul class="list-group font-weight-bold">
+                {% for cinema in cinemas %}
+                    <a class="list-group-item list-group-item-action" href="{% url "Ticketing:cinema_detail" cinema_id=cinema.Cod %}">
+                        <p class="text-primary">
+                            <i class="bi bi-building text-success ml-4"></i>
+                            {{ cinema }}
+                            <small class="text-footer text-muted">( {{ cinema.city }} )</small>
+                        </p>
+                    </a>
+                {% endfor %}
+            </ul>
+            <div class="text-left pr-5 font-weight-bold">
+                <p class="pt-3">
+                    تعداد
+                    {{ cinemas_c }}
+                    سینما در سایت موجود است
+                </p>
+            </div>
+        {% else %}
+            <h1 class="alert alert-danger text-center d-block" style="text-align: center">هیچ سینما موجود نمی باشد </h1>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}

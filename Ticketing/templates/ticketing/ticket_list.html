@@ -1,0 +1,73 @@
+{% extends "ticketing/page-Base_list.html" %}
+{#    ##################################################################}
+{% block page-title %}
+    لیست بلیط
+{% endblock %}
+
+{#<\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\>#}
+{% block page-nav-name %}
+    لیست بلیط ها
+{% endblock %}
+{#    ##################################################################}
+{% block main-content %}
+    {% csrf_token %}
+    <div class="bg-light p-3 rounded">
+        {% if tickets %}
+            <div class="row d-flex justify-content-start mr-4">
+                {% for ticket in tickets %}
+                    <div class="col-sm-2 mb-3">
+                        <a href="{%  url "Ticketing:ticket_detail" ticket_id=ticket.id %}"
+                           class="ticket-box btn d-flex flex-column btn-outline-dark border-primary">
+                           <span>{{ ticket.showtime.movie }}</span>
+                           <br/>
+                           <span>{{ ticket.showtime.cinema }}</span>
+                           <br/>
+                           <span>
+                               {{ ticket.showtime.start_time|date:"l n/j ساعت H:i" }}
+                           </span>
+                           <br/>
+                           <span>خرید در
+                               {{ ticket.buy_time|date:"l n/j ساعت H:i" }}
+                           </span>
+                           <hr/>
+{#                           <span class="showtime-status badge mx-auto#}
+{#                                  {% if ticket.showtime.status == ticket.showtime.sale_started or ticket.showtime.sale_ended %}#}
+{#                                      badge-success#}
+{#                                  {% else %}#}
+{#                                      badge-secondary#}
+{#                                  {% endif %}">#}
+{#                               {% if ticket.showtime.status == ticket.showtime.sale_started %}#}
+{#                                   {{ ticket.showtime.get_price_display }}#}
+{#                               {% else %}#}
+{#                                   عدم اعتبار بلیط به علت :#}
+{#                                   {{ ticket.showtime.get_status_display}}#}
+{#                               {% endif %}#}
+{#                           </span>#}
+                            <div class="text-primary d-flex justify-content-end row">
+                                <div class="col-md-4">
+                                    <i class="fas text-danger fa-calculator">
+                                         {{ ticket.seat_number }}
+                                    </i>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+
+                {% endfor %}
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="alert alert-info col-3">
+                        {{ tickets_c}}
+                        بلیط یافت شد.
+                </div>
+            </div>
+        {% else %}
+            <div class="alert alert-warning text-center">
+                متسفانه هیچ بلیطی برای شما
+                {{ user.get_full_name }}
+                وجود ندارد
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

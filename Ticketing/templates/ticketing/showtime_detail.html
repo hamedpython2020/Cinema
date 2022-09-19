@@ -1,0 +1,79 @@
+{% extends "ticketing/page-Base_list.html"%}
+{#    ##################################################################}
+{% block page-title %}
+ مشخصات سانس فیلم {{ showtimes.movie }}
+{% endblock %}
+{#    ##################################################################}
+{% block page-nav-name %}
+    درباره سانس  {{ showtimes.movie }}
+{% endblock %}
+{#    ##################################################################}
+{% block main-content %}
+        <div class="media">
+        <div class="media-body d-flex flex-column bg-light mx-5">
+            <h1 class="mt-4 text-center">سانس {{ showtime.movie }}</h1>
+            <div class="row m-5" style="font-size: large">
+                <div class="row col-md-8 py-2 ">
+                    <p class="rounded  text-danger bg-warning p-3 col-3 "> فیلم : </p>
+                    <p class="rounded text-dark col-8 bg-secondary p-2 text-center offset-md-9"> {{ showtime.movie }} </p>
+                    <p class="rounded bg-warning p-3 text-danger col-3 "> زمان اکران : </p>
+                    <p class="rounded text-center text-dark bg-secondary p-2 col-8 offset-md-9"> {{ showtime.start_time|date:"Y/n/j - H:i"  }} </p>
+                    <p class="rounded bg-warning p-3 text-danger col-3 "> سینما : </p>
+                    <p class="rounded text-dark col-8 bg-secondary p-2 text-center offset-md-9"> {{ showtime.cinema}} </p>
+                    <p class="rounded  text-danger bg-warning p-3 col-3 "> آدرس سینما : </p>
+                    <p class="rounded text-dark col-8 bg-secondary p-2 text-center offset-md-9"> {{ showtime.cinema.address }} </p>
+                </div>
+                    <div class="rounded alert col-md-4 alert-warning p-3 text-danger col-8 ">
+                        <h3 class="text-center display-5"> توصیه : </h3>
+                        <hr/>
+                        <p class="text-info"><i class="bi text-danger bi-exclamation-triangle-fill"></i> -
+                            حتما 30 دقیقه قبل از شروع فیلم در سینما حاضر شوید .</p>
+                        <hr/>
+                        <p class="text-info"><i class="bi text-danger bi-exclamation-triangle-fill"></i> -
+                             بلیط ها را به همراه خود داشته باشید. </p>
+                        <hr/>
+                        <p class="text-info"><i class="bi text-danger bi-exclamation-triangle-fill"></i> -
+                             تعداد {{ showtime.free_seats }} صندلی باقی مانده . </p>
+                    </div>
+                </div>
+            {% if showtime.status == showtime.sale_started %}
+                <div class="row justify-content-end">
+                    <div class="py-1 row m-5 align-items-center col-md-5 rounded alert-dark">
+                        <div class="col-6">
+                                <i class="fas fa-money-bill-wave"></i>
+                                قیمت بلیت:
+                            {{ showtime.price }}
+                            تومان
+                        </div>
+                        <div class="col-md-5">
+                            <form action="" method="post" class="form-inline">
+                                {% csrf_token %}
+                                <select name="ticket_count" class="form-control form-control-sm ml-2">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                                <button type="submit" class="btn  btn-success my-2" >
+                                    خرید بلیت
+                                </button>
+                            </form>
+                            {% if error %}
+                                <p class="w-100 text-danger alert alert-warning">
+                                    <i class="bi bi-exclamation-triangle-fill"></i>
+                                    {{ error }}
+                                </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

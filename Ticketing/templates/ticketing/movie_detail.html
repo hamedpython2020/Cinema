@@ -1,0 +1,38 @@
+{% extends "ticketing/page-Base_list.html"%}
+{#    ##################################################################}
+{% block page-title %}
+    {{ movies.name }}
+{% endblock %}
+{#    ##################################################################}
+{% block page-nav-name %}
+    درباره فیلم
+    {{ movies }}
+{% endblock %}
+{#    ##################################################################}
+{% block main-content %}
+    <div class="media">
+        <div class="media-body d-flex flex-column bg-light mx-5">
+            <h1 class="mt-4 text-center">{{ movies.name }}</h1>
+            <div class="row m-5" style="font-size: large">
+                <div class="row col-md-8 ">
+                    <p class="rounded  text-danger bg-warning p-3 col-3 offset-md-9"> کارگردان : </p>
+                    <p class="rounded text-dark col-8 bg-secondary p-2 text-center "> {{ movies.director }} </p>
+                    <p class="rounded bg-warning p-3 text-danger col-3 offset-md-9"> سال ساخت : </p>
+                    <p class="rounded text-center text-dark bg-secondary p-2 col-8"> {{ movies.year }} </p>
+                    <p class="rounded bg-warning p-3 text-danger col-3 offset-md-9"> مدت زمان فیلم : </p>
+                    <p class="rounded text-center text-dark bg-secondary p-2 col-8" > {{ movies.length }} دقیقه </p>
+                    <p class="rounded bg-warning p-3 text-danger col-3 offset-md-9"> خلاصه : </p>
+                    <p class="rounded text-end text-dark bg-secondary p-3 text-justify col-8"> {{ movies.description }} </p>
+                </div>
+                <div class="col-md-4">
+                    {% if movies.poster %}
+                        <img class="mx-5 mt-2" src="{{ movies.poster.url }}" width=400px" height="400" alt="{{ movies.name }}">
+                    {% else %}
+                        <i class="bi bi-film text-info " style="font-size: 300px"></i>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

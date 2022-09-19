@@ -1,0 +1,39 @@
+{% extends "ticketing/page-Base_list.html" %}
+{#    ##################################################################}
+{% block page-title %}
+    فهرست فیلم ها
+{% endblock %}
+{#    ##################################################################}
+{% block page-nav-name %}
+    لیست فیلم ها
+{% endblock %}
+{#    ##################################################################}
+{% block main-content %}
+    <div class="row pt-2">
+        <div class="col-1"> </div>
+            {% if movies %}
+            <div class="col-10">
+            <ul class="list-group font-weight-bold">
+                {% for movie in movies %}
+                    <a class="list-group-item list-group-item-action" href="{% url "Ticketing:movie_detail" movie_id=movie.id %}">
+                        <p class="text-primary">
+                            <i class="bi bi-film ml-3 text-success "></i>
+                            {{ movie }}
+                            <small class="text-footer text-muted">( {{ movie.director }} )</small>
+                        </p>
+                    </a>
+                {% endfor %}
+            </ul>
+            <div class="text-left pr-5 font-weight-bold">
+                <p class="pt-3">
+                    تعداد
+                    <mark class="text-success" style="font-size: 20px"> {{ movies_c }} </mark>
+                    فیلم در سایت موجود است
+                </p>
+            </div>
+        {% else %}
+            <h1 class="alert alert-danger text-center d-block" style="text-align: center">هیچ فیلم موجود نمی باشد </h1>
+        {% endif %}
+        </div>
+    </div>
+{% endblock %}
