@@ -1,0 +1,39 @@
+{% extends 'ticketing/page-Base_list.html' %}
+
+{% block page-title %}
+    پرداخت های من
+{% endblock %}
+{###########################################################}
+{% block page-nav-name %}
+    تاریخچه ی پرداخت
+{% endblock %}
+{###########################################################}
+{% block main-content %}
+    {% csrf_token %}
+    <div class="row d-flex justify-content-center bg-light m-4 ">
+        <div class="col-md-9">
+            <a href="{% url "accounts:payment_creat" %}" class="btn m-4 flex-row btn-outline-primary">
+                <i class="bi text-danger w-100 bi-window-plus"></i>  افزایش اعتبار</a>
+            <table class="table m-3 table-striped border border-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">زمان پرداخت</th>
+                        <th scope="col">مبلغ</th>
+                        <th scope="col">رسید پرداخت</th>
+                        <th scope="col">وضعیت</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pay in payment %}
+                        <tr>
+                            <td>{{ pay.payment_time|date:"Y/n/j - H:i" }}</td>
+                            <td>{{ pay.amount }}</td>
+                            <td>{{ pay.payment_cod }}</td>
+                            <td>موفق</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

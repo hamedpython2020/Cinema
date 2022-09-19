@@ -1,0 +1,32 @@
+{% extends "ticketing/page-Base_list.html" %}
+{% block page-title %}
+     صفحه ورود به حساب کاربری
+{% endblock %}
+
+{% block page-nav-name %}
+    ورود به حساب کاربری
+{% endblock %}
+
+{% block main-content %}
+    <div class="row">
+        <form action="" method="POST" class=" col-md-4 bg-danger p-5 mx-auto rounded row">
+            {% csrf_token %}
+            {% if error %}
+                <div class="alert alert-warning col-8 mb-3 mr-5">
+                    {{ error }}
+                </div>
+            {% endif %}
+            <div class="form-group col-md-12">
+                <label for="Username">نام کاربری</label>
+                <input class="form-control" type="text" id="Username" name="username" placeholder="نام کاربری" value={{ username }}>
+                <small class="form-text text-white">نام کاربری خود را وارد کنید</small>
+            </div>
+            <div class=" form-group col-12">
+                <label for="Password">رمز عبور</label>
+                <input class="form-control" type="password" id="Password" placeholder="رمز عبور" name="password" >
+                <small class="form-text text-white">رمز عبور خود را وارد کنید</small>
+            </div>
+            <button class=" btn-outline-success mr-auto px-3" type="submit">ارسال</button>
+        </form>
+    </div>
+{% endblock %}

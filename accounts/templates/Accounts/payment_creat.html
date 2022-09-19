@@ -1,0 +1,28 @@
+{% extends 'ticketing/page-Base_list.html' %}
+
+{% block page-title %}
+    افزایش اعتبار
+{% endblock %}
+{############################################}
+{% block page-nav-name %}
+    افزایش اعتبار
+{% endblock %}
+{############################################}
+{% block main-content %}
+    <div class="row d-flex justify-content-center">
+        <form class="col-md-9 form-row flex-column row bg-light" method="POST">
+        {% csrf_token %}
+            {% for field in payment_form %}
+                <label class="m-2"  for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
+                <div dir="ltr">
+                    {{ field }}
+
+                    {{ field.errors}}
+                </div>
+            {% endfor %}
+            <button type="submit" class="btn m-4 btn-info">ثبت </button>
+        </form>
+    </div>
+{% endblock %}

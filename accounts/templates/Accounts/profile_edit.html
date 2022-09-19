@@ -1,0 +1,95 @@
+{% extends 'ticketing/page-Base_list.html' %}
+
+{% block page-title %}
+    ویرایش نمایه
+{% endblock %}
+{###########################################}
+{% block page-nav-name %}
+    ویرایش پروفایل
+{% endblock %}
+{###########################################}
+{% block main-content %}
+    <div class="m-5 bg-light rounded ">
+        <form class="form-row row" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+            <div class="row col-7 offset-1 m-3">
+                <label class="col-md-2 text-center my-2" >
+                    نام کاربری :
+                </label>
+                <div class=" text-center my-2 col-md-4">
+                    {{ user.username }}
+                </div>
+                <label  class="my-2 text-center col-md-2">
+                    جنسیت :
+                </label>
+                <div class="col-md-4 my-2 text-center">
+                    {{ profile_form.gender }}
+                </div>
+                    <label class="my-2 text-center col-md-2" >
+                    نام :
+                </label>
+                <div class="col-md-4 my-2 text-center">
+                    {{ form_user.first_name }}
+                    {{ form_user.first_name.errors }}
+                </div>
+                <label for="field.id_for_label" class="my-2 text-center col-md-2" >
+                    نام خانوادگی :
+                </label>
+                <div class="col-md-4 my-2 text-center">
+                    {{ form_user.last_name}}
+                    {{ form_user.last_name.errors}}
+                </div>
+                <label class="my-2 text-center col-md-2" >
+                    موبایل :
+                </label>
+                <div class="col-md-4 my-2 text-center">
+                    {{ profile_form.mobile }}
+                    {{ profile_form.mobile.errors }}
+                </div>
+                <label class="my-2 text-center col-md-2" >
+                    ایمیل :
+                </label>
+                <div class="col-md-4 my-2 text-center">
+                    {{ form_user.email}}
+                </div>
+                <label class="my-2 text-center col-md-2" >
+                    آدرس :
+                </label>
+                <div class="col-md-10 my-2  ">
+                    {{ profile_form.address }}
+                </div>
+            </div>
+            <div class="col-md-4 m-3 align-content-center row">
+{#                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#picture_modal">#}
+{#                    Launch demo modal#}
+{#                </button>#}
+{#                <div class="modal fade" id="picture_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">#}
+{#                    <div class="modal-dialog">#}
+{#                        <div class="modal-content">#}
+{#                            <div class="modal-header">#}
+{#                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>#}
+{#                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>#}
+{#                            </div>#}
+{#                            <div class="modal-body">#}
+                                <label class="my-2 text-center col-3" >
+                                    {{ profile_form.profile_image.label }}
+                                </label>
+                                <div class="col-12 my-2 rounded-circle text-center ">
+                                    {{ profile_form.profile_image }}
+                                </div>
+                            </div>
+{#                            <div class="modal-footer">#}
+{#                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+{#                                <button type="button" class="btn btn-primary">Save changes</button>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+            <button class="btn m-5 btn-success col-1" type="submit">
+                ذخیره
+            </button>
+        </form>
+    </div>
+{% endblock %}
+<!-- Button trigger modal -->

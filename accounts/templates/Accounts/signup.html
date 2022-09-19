@@ -1,0 +1,77 @@
+{% extends 'ticketing/page-Base_list.html' %}
+
+{% block page-title %}
+    ثبت نام
+{% endblock %}
+
+{% block page-nav-name%}
+    ثبت نام
+{% endblock %}
+
+{##############################}
+{% block main-content %}
+    <div class="row d-flex justify-content-center">
+        <form class="col-8 form-row bg-light justify-content-center rounded my-2" method="POST">
+            {% csrf_token %}
+{#            ##########################}
+            <div class="col-md-6 d-flex form-row border-primary border-left">
+                <label class="col- my-2">
+                    {{ signup.username.label }} :
+                </label>
+                <div class="col- offset-5 my-2">
+                    {{ signup.username }}
+                    {{ signup.username.errors}}
+                </div>
+                <label class=" col-  my-2">
+                    {{ prof_form.mobile.label }} :
+                </label>
+                <div class="col- offset-5 my-2">
+                    {{ prof_form.mobile }}
+                    {{ prof_form.mobile.errors }}
+                </div>
+                <label class=" col- ml-4 my-2">
+                    {{ prof_form.email.label }} :
+                </label>
+                <div class="col-  my-2">
+                    {{ prof_form.email }}
+                    {{ prof_form.email.errors }}
+                </div>
+                <label class="col- mr-5 my-2">
+                    {{ prof_form.gender.label }} :
+                </label>
+                <div class="col- mr-3 my-2 ">
+                    {{ prof_form.gender }}
+                </div>
+            </div>
+{#            ###########################}
+            <div class="col-md-6 d-flex mr-2 form-row">
+                <label class="col- ml-5 my-2">
+                    {{ signup.password1.label }} :
+                </label>
+                <div class="col- offset-5 my-2 ">
+                    {{ signup.password1 }}
+                    {{ signup.password1.errors }}
+                </div>
+                <label class="col- ml-3 my-2">
+                    {{ signup.password2.label }} :
+                </label>
+                <div class="col- offset-5 my-2">
+                    {{ signup.password2 }}
+                    {{ signup.password2.errors }}
+                </div>
+                <label class="col- ml-4 my-2">
+                    {{ prof_form.birth_date.label }} :
+                </label>
+                <div class="col- my-2">
+                    {{ prof_form.birth_date }}
+                    {{ prof_form.birth_date.errors }}
+                </div>
+            </div>
+{#            ###########################}
+            <button class="btn btn-success mt-3 mb-2" type="submit">
+                ثبت نام
+            </button>
+        </form>
+    </div>
+{% endblock %}
+

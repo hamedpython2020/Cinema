@@ -1,0 +1,61 @@
+{% extends "ticketing/page-Base_list.html"  %}
+{# /////////////////////////////////////////////////////// #}
+{% block page-title %}
+    {{ user.get_full_name }}
+{% endblock %}
+
+{% block page-nav-name %}
+    صفحه کاربری
+{% endblock %}
+
+{% block main-content %}
+    {% csrf_token %}
+    <div class="media">
+        <div class="media-body d-flex flex-column bg-light mx-5">
+                <div class="row m-5" >
+                <div class="row col-md-8 d-flex pt-4 ">
+                    <p class="rounded  text-danger bg-warning p-2 col-3 offset-md-1 "> نام و نام خانوادگی : </p>
+                    <p class="rounded text-dark col-8 bg-secondary p-2 text-center "> {{ user.get_full_name }} </p>
+{#                    <p class="rounded bg-warning p-2 text-danger col-3 offset-md-1"> فامیل : </p>#}
+{#                    <p class="rounded text-center text-dark bg-secondary p-2 col-8"> {{user.last_name }} </p>#}
+                    <p class="rounded bg-warning p-2 text-danger col-3 offset-md-1"> سال تولد : </p>
+                    <p class="rounded text-center text-dark bg-secondary p-2 col-8" > {{ profile.Birth_date}}</p>
+                    <p class="rounded bg-warning p-2 text-danger col-3 offset-md-1"> مبایل : </p>
+                    <p class="rounded text-center text-dark bg-secondary p-2 col-8"> {{ profile.mobile }} </p>
+                    <p class="rounded bg-warning p-2 text-danger col-3 offset-md-1"> آدرس: </p>
+                    <p class="rounded text-center text-dark bg-secondary p-2 col-8" > {{ profile.address}}</p>
+                    <p class="rounded bg-warning p-2 text-danger col-3 offset-md-1"> موجودی کیف پول : </p>
+                    <p class="rounded text-center text-dark bg-secondary p-2 col-3 offset-md-1"> {{ profile.balance }} </p>
+                </div>
+                <div class="col-md-4">
+                    {% if profile.profile_image %}
+                        <img class="mx-5 mt-2 rounded-circle" src="{{ profile.profile_image.url }}" width=400px" height="400" alt="{{ movies.name }}">
+                    {% else %}
+                        <i class="bi bi-person-circle text-info " style="font-size: 300px"></i>
+                    {% endif %}{# image #}
+                    <p class="alert alert-primary m-5" > نام کاربری : {{ user.username }}</p>
+                </div>
+            </div> {# the rows and data and image #}
+            <div class="row d-flex px-5 py-2 align-content-start">
+                <div class="justify-content-end row col-6 order-1">
+                    <a class="btn col-md-3 btn-outline-success order-0" href="{% url 'accounts:payment_creat' %}">افزایش اعتبار
+                    <i class="bi bi-credit-card"></i>
+                    </a>
+                    <a class="btn btn-outline-primary col-md-4 mr-2 order-2" href="{% url 'Ticketing:showtime_list' %}">تایید و ذخیره اطلاعات
+                    <i class="bi bi-save"></i>
+                    </a>
+                    <a class="btn btn-outline-secondary col-md-3 mx-2 order-1" href="{% url 'accounts:profile_edit' %}">ویرایش اطلاعات
+                    <i class="bi bi-pencil"></i>
+                    </a>
+                </div>
+                <div class=" row col-6 order-0">
+                    <a class="btn text-danger btn-outline-warning col-3 " href="">تغیر گذرواژه
+                    <i class="bi bi-key-fill mr-2"></i>
+                    </a>
+                </div>
+            </div> {# buttons #}
+        </div>
+
+    </div>
+
+{% endblock %}
